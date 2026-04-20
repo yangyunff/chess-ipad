@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta
@@ -9,8 +9,8 @@
   <meta name="theme-color" content="#dbe9df">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="童趣国际象棋">
-  <title>童趣国际象棋</title>
+  <meta name="apple-mobile-web-app-title" content="Chess for Kids">
+  <title>Chess for Kids</title>
   <link rel="manifest" href="app.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles-ipad.css">
@@ -20,99 +20,99 @@
     <header class="hero">
       <div>
         <p class="eyebrow">iPad-ready Chess App</p>
-        <h1>童趣国际象棋</h1>
+        <h1>Chess for Kids</h1>
         <p class="hero-copy">
-          这是一版针对 iPad 触控和主屏使用场景优化的国际象棋应用。支持人人对战、人机对战和 3 档 AI 难度，
-          并采用更柔和的护眼配色。
+          A touch-friendly chess build for iPad and mobile Safari. It supports local multiplayer,
+          AI matches with three difficulty levels, and a softer eye-friendly color palette.
         </p>
       </div>
-      <div class="hero-chip" id="turn-chip">白方回合</div>
+      <div class="hero-chip" id="turn-chip">White to move</div>
     </header>
 
     <main class="layout">
       <section class="board-panel">
         <div class="board-frame">
           <div class="board-header">
-            <span>棋盘</span>
-            <span id="status-pill" class="status-pill">对局进行中</span>
+            <span>Board</span>
+            <span id="status-pill" class="status-pill">Game in progress</span>
           </div>
 
           <div class="board-stage">
-            <div id="board" class="board" aria-label="国际象棋棋盘"></div>
+            <div id="board" class="board" aria-label="Chess board"></div>
           </div>
 
           <div class="board-footer">
-            <span id="selection-hint">点击棋子开始移动</span>
-            <span id="last-move">最近一步：暂无</span>
+            <span id="selection-hint">Tap a piece to start moving</span>
+            <span id="last-move">Last move: none</span>
           </div>
         </div>
       </section>
 
       <aside class="sidebar">
         <section class="card controls-card">
-          <h2>对局设置</h2>
+          <h2>Game Setup</h2>
 
           <label class="field">
-            <span>模式</span>
+            <span>Mode</span>
             <select id="mode-select">
-              <option value="ai">人机对战</option>
-              <option value="human">人人对战</option>
+              <option value="ai">Play vs AI</option>
+              <option value="human">Two Players</option>
             </select>
           </label>
 
           <label class="field">
-            <span>难度</span>
+            <span>Difficulty</span>
             <select id="difficulty-select">
-              <option value="easy">初级</option>
-              <option value="medium" selected>中级</option>
-              <option value="hard">高级</option>
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
             </select>
           </label>
 
           <label class="field">
-            <span>我方执子</span>
+            <span>Your Side</span>
             <select id="player-color-select">
-              <option value="w" selected>白方</option>
-              <option value="b">黑方</option>
+              <option value="w" selected>White</option>
+              <option value="b">Black</option>
             </select>
           </label>
 
           <div class="button-row">
-            <button id="restart-btn" class="primary-btn" type="button">重新开始</button>
-            <button id="undo-btn" class="ghost-btn" type="button">悔棋</button>
+            <button id="restart-btn" class="primary-btn" type="button">Restart</button>
+            <button id="undo-btn" class="ghost-btn" type="button">Undo</button>
           </div>
         </section>
 
         <section class="card info-card">
-          <h2>当前局面</h2>
+          <h2>Game State</h2>
           <div class="facts">
             <div class="fact">
-              <span class="fact-label">回合</span>
-              <strong id="turn-text">白方</strong>
+              <span class="fact-label">Turn</span>
+              <strong id="turn-text">White</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">模式</span>
-              <strong id="mode-text">人机对战</strong>
+              <span class="fact-label">Mode</span>
+              <strong id="mode-text">Play vs AI</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">AI 状态</span>
-              <strong id="ai-text">待命</strong>
+              <span class="fact-label">AI</span>
+              <strong id="ai-text">Idle</strong>
             </div>
           </div>
           <p id="game-message" class="game-message">
-            选择一个棋子后，系统会高亮它的合法走法。
+            Select a piece to highlight its legal moves.
           </p>
         </section>
 
         <section class="card install-card">
-          <h2>iPad 使用</h2>
+          <h2>Install on iPad</h2>
           <p id="install-tip" class="install-copy">
-            在 iPad Safari 中打开后，点“分享”再选择“添加到主屏幕”，就能像 App 一样全屏打开。
+            Open this page in Safari, tap Share, then choose Add to Home Screen.
           </p>
         </section>
 
         <section class="card moves-card">
-          <h2>步法记录</h2>
+          <h2>Move List</h2>
           <ol id="move-list" class="move-list"></ol>
         </section>
       </aside>
@@ -121,12 +121,12 @@
 
   <div id="promotion-modal" class="modal hidden" aria-hidden="true">
     <div class="modal-card">
-      <p>兵升变为：</p>
+      <p>Promote pawn to:</p>
       <div class="promotion-options">
-        <button type="button" data-piece="q">后</button>
-        <button type="button" data-piece="r">车</button>
-        <button type="button" data-piece="b">象</button>
-        <button type="button" data-piece="n">马</button>
+        <button type="button" data-piece="q">Queen</button>
+        <button type="button" data-piece="r">Rook</button>
+        <button type="button" data-piece="b">Bishop</button>
+        <button type="button" data-piece="n">Knight</button>
       </div>
     </div>
   </div>
