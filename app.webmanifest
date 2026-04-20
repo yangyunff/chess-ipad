@@ -1,6 +1,6 @@
 {
-  "name": "童趣国际象棋",
-  "short_name": "国际象棋",
+  "name": "Chess for Kids",
+  "short_name": "Chess",
   "start_url": "./ipad.html",
   "display": "standalone",
   "background_color": "#eef5f1",
